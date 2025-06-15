@@ -10,7 +10,7 @@ namespace BattleshipApi.Controllers
         private readonly GridService _gridService;
         private readonly UserInputService _userInputService;
 
-        public GridController(GridService gridService,UserInputService userInputService)
+        public GridController(GridService gridService, UserInputService userInputService)
         {
             _gridService = gridService;
             _userInputService = userInputService;
@@ -41,7 +41,7 @@ namespace BattleshipApi.Controllers
             }
             else
             {
-                var result=_userInputService.ProcessUserInput(value);
+                var result = _userInputService.ProcessUserInput(value);
                 return Ok(result);
             }
         }

@@ -6,7 +6,7 @@ class Program
     {
         using var httpClient = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:7258/") 
+            BaseAddress = new Uri("https://localhost:7258/")
         };
 
         while (true)
@@ -25,7 +25,7 @@ class Program
                 break;
 
             await GetUserInputStatus(httpClient, userInput.Trim().ToUpper());
-            
+
         }
         await GetGrid(httpClient);
         Console.WriteLine("Game ended.");
@@ -56,11 +56,11 @@ class Program
         Console.WriteLine();
     }
 
-    public static async Task GetUserInputStatus(HttpClient httpClient,string input)
+    public static async Task GetUserInputStatus(HttpClient httpClient, string input)
     {
         try
         {
-            var response = await httpClient.PostAsJsonAsync("api/Grid",input);
+            var response = await httpClient.PostAsJsonAsync("api/Grid", input);
 
             if (response.IsSuccessStatusCode)
             {
