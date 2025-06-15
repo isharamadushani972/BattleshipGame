@@ -14,7 +14,6 @@ public class UserInputService
 
     public string ProcessUserInput(string input)
     {
-        input = input.Trim().ToUpper();
         int row = GetRowFromInput(input[0]);
         int column = GetColumnFromInput(int.Parse(input.Substring(1)));
 
@@ -105,6 +104,7 @@ public class UserInputService
             default: return 11;
         }
     }
+
     private int GetColumnFromInput(int column)
     {
         return column - 1;

@@ -96,44 +96,117 @@ public class GridService
         return shipCells;
     }
 
-    public Cell[,] PrintGrid()
-    {
-        Cell[,] gridCopy = _grid;
+    //public Cell[,] PrintGrid()
+    //{
+    //    Cell[,] gridCopy = _grid;
 
-        // Print column headers (1 to 10)
-        Console.Write("   "); // spacing for row labels
+    //    // Print column headers (1 to 10)
+    //    Console.Write("   "); // spacing for row labels
+    //    for (int col = 1; col <= 10; col++)
+    //    {
+    //        Console.Write($"{col,2} ");
+    //    }
+    //    Console.WriteLine();
+
+    //    for (int row = 0; row < 10; row++)
+    //    {
+    //        char rowLabel = (char)('A' + row); // Convert 0 => 'A', 1 => 'B', etc.
+    //        Console.Write($"{rowLabel}  "); // Print row label
+
+    //        for (int col = 0; col < 10; col++)
+    //        {
+    //            var cell = _grid[row, col];
+
+    //            // Choose a character based on cell type
+    //            string displayChar = cell.Type switch
+    //            {
+    //                CellType.Battleship => "B",
+    //                CellType.Destroyership1 => "D1",
+    //                CellType.Destroyership2 => "D2",
+    //                _ => "."
+    //            };
+
+    //            Console.Write($"{displayChar,2} ");
+    //        }
+
+    //        Console.WriteLine(); // New line after each row
+    //    }
+
+    //    return gridCopy;
+    //}
+
+    public string PrintActualGrid()
+    {
+        var sb = new System.Text.StringBuilder();
+
+        sb.Append("   ");
         for (int col = 1; col <= 10; col++)
         {
-            Console.Write($"{col,2} ");
+            sb.Append($"{col,2} ");
         }
-        Console.WriteLine();
+        sb.AppendLine();
 
         for (int row = 0; row < 10; row++)
         {
-            char rowLabel = (char)('A' + row); // Convert 0 => 'A', 1 => 'B', etc.
-            Console.Write($"{rowLabel}  "); // Print row label
+            char rowLabel = (char)('A' + row);
+            sb.Append($"{rowLabel}  ");
 
             for (int col = 0; col < 10; col++)
             {
                 var cell = _grid[row, col];
-
-                // Choose a character based on cell type
                 string displayChar = cell.Type switch
                 {
                     CellType.Battleship => "B",
                     CellType.Destroyership1 => "D1",
                     CellType.Destroyership2 => "D2",
+                    CellType.Hit => "H",
+                    CellType.Miss => "M",
                     _ => "."
                 };
 
-                Console.Write($"{displayChar,2} ");
+                sb.Append($"{displayChar,2} ");
             }
 
-            Console.WriteLine(); // New line after each row
+            sb.AppendLine();
         }
 
-        return gridCopy;
+        return sb.ToString();
     }
+    public string PrintUserInputGrid()
+    {
+        var sb = new System.Text.StringBuilder();
+
+        sb.Append("   ");
+        for (int col = 1; col <= 10; col++)
+        {
+            sb.Append($"{col,2} ");
+        }
+        sb.AppendLine();
+
+        for (int row = 0; row < 10; row++)
+        {
+            char rowLabel = (char)('A' + row);
+            sb.Append($"{rowLabel}  ");
+
+            for (int col = 0; col < 10; col++)
+            {
+                var cell = _grid[row, col];
+                string displayChar = cell.Type switch
+                {
+                    CellType.Hit => "H",
+                    CellType.Miss => "M",
+                    _ => "."
+                };
+
+                sb.Append($"{displayChar,2} ");
+            }
+
+            sb.AppendLine();
+        }
+
+        return sb.ToString();
+    }
+
 
     public Cell GetCell(int row, int col) => _grid[row, col];
 

@@ -10,17 +10,25 @@ namespace BattleshipApi.Controllers
         private readonly GridService _gridService;
         private readonly UserInputService _userInputService;
 
-        public GridController(GridService gridService)
+        public GridController(GridService gridService,UserInputService userInputService)
         {
             _gridService = gridService;
+            _userInputService = userInputService;
         }
 
-        [HttpGet]
-        public IActionResult GetGrid()
+        [HttpGet("actualgrid")]
+        public IActionResult GetActualGrid()
         {
-            return Ok(_gridService.PrintGrid());
+            string grid = _gridService.PrintActualGrid();
+            return Ok(grid);
         }
 
+        [HttpGet("usergrid")]
+        public IActionResult GetUserGrid()
+        {
+            string grid = _gridService.PrintUserInputGrid();
+            return Ok(grid);
+        }
 
         [HttpPost]
         public IActionResult ProcessUserInput([FromBody] string value)
