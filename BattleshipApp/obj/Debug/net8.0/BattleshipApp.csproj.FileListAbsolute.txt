@@ -1,0 +1,14 @@
+C:\Repos\Learning\Battleship\BattleshipApp\bin\Debug\net8.0\BattleshipApp.exe
+C:\Repos\Learning\Battleship\BattleshipApp\bin\Debug\net8.0\BattleshipApp.deps.json
+C:\Repos\Learning\Battleship\BattleshipApp\bin\Debug\net8.0\BattleshipApp.runtimeconfig.json
+C:\Repos\Learning\Battleship\BattleshipApp\bin\Debug\net8.0\BattleshipApp.dll
+C:\Repos\Learning\Battleship\BattleshipApp\bin\Debug\net8.0\BattleshipApp.pdb
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\BattleshipApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\BattleshipApp.AssemblyInfoInputs.cache
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\BattleshipApp.AssemblyInfo.cs
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\BattleshipApp.csproj.CoreCompileInputs.cache
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\BattleshipApp.dll
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\refint\BattleshipApp.dll
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\BattleshipApp.pdb
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\BattleshipApp.genruntimeconfig.cache
+C:\Repos\Learning\Battleship\BattleshipApp\obj\Debug\net8.0\ref\BattleshipApp.dll
