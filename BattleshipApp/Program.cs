@@ -2,11 +2,16 @@
 
 class Program
 {
+    private const string ActualGridEndpoint = "api/Grid/actualgrid";
+    private const string UserGridEndpoint = "api/Grid/usergrid";
+    private const string GridEndpoint = "api/Grid";
+    private const string BaseUrl = "https://localhost:7258/";
+
     static async Task Main()
     {
         using var httpClient = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:7258/")
+            BaseAddress = new Uri(BaseUrl)
         };
 
         while (true)
@@ -35,7 +40,7 @@ class Program
     {
         try
         {
-            var response = await httpClient.GetAsync("api/Grid/actualgrid");
+            var response = await httpClient.GetAsync(ActualGridEndpoint);
 
             if (response.IsSuccessStatusCode)
             {
@@ -60,7 +65,7 @@ class Program
     {
         try
         {
-            var response = await httpClient.PostAsJsonAsync("api/Grid", input);
+            var response = await httpClient.PostAsJsonAsync(GridEndpoint, input);
 
             if (response.IsSuccessStatusCode)
             {
@@ -84,7 +89,7 @@ class Program
     {
         try
         {
-            var response = await httpClient.GetAsync("api/Grid/usergrid");
+            var response = await httpClient.GetAsync(UserGridEndpoint);
 
             if (response.IsSuccessStatusCode)
             {

@@ -5,10 +5,12 @@ namespace BattleshipApi.Services;
 
 public class UserInputService
 {
+    private readonly int _gridSize;
     private readonly GridService _gridService;
 
-    public UserInputService(GridService gridService)
+    public UserInputService(GridService gridService, IConfiguration configuration)
     {
+        _gridSize = configuration.GetValue<int>("GridSettings:GridSize");
         _gridService = gridService;
     }
 
@@ -69,7 +71,7 @@ public class UserInputService
             return (false, "Invalid row. It should be a letter from A to J.");
         }
 
-        if (!int.TryParse(colChar, out int col) || col < 1 || col > 10)
+        if (!int.TryParse(colChar, out int col) || col < 1 || col > _gridSize)
         {
             return (false, "Invalid column. It should be a number from 1 to 10.");
         }
@@ -79,30 +81,7 @@ public class UserInputService
 
     private int GetRowFromInput(char row)
     {
-        switch (row)
-        {
-            case 'A':
-                return 0;
-            case 'B':
-                return 1;
-            case 'C':
-                return 2;
-            case 'D':
-                return 3;
-            case 'E':
-                return 4;
-            case 'F':
-                return 5;
-            case 'G':
-                return 6;
-            case 'H':
-                return 7;
-            case 'I':
-                return 8;
-            case 'J':
-                return 9;
-            default: return 11;
-        }
+        return row - 'A';
     }
 
     private int GetColumnFromInput(int column)

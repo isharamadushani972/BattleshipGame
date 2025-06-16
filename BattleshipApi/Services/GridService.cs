@@ -1,19 +1,20 @@
 ﻿using BattleshipApi.Models;
 using BattleshipApi.Models.Enums;
-using System;
 
 namespace BattleshipApi.Services;
 
 public class GridService
 {
+    private readonly int _gridSize;
     private readonly Cell[,] _grid;
     private readonly List<Cell> Battleship;
     private readonly List<Cell> DestroyerShip1;
     private readonly List<Cell> DestroyerShip2;
 
-    public GridService()
+    public GridService(IConfiguration configuration)
     {
-        _grid = new Cell[10, 10];
+        _gridSize = configuration.GetValue<int>("GridSettings:GridSize");
+        _grid = new Cell[_gridSize, _gridSize];
         InitializeGrid();
         Battleship = PlaceBattleship();
         DestroyerShip1 = Destroyership1();
@@ -22,9 +23,9 @@ public class GridService
 
     private void InitializeGrid()
     {
-        for (int row = 0; row < 10; row++)
+        for (int row = 0; row < _gridSize; row++)
         {
-            for (int col = 0; col < 10; col++)
+            for (int col = 0; col < _gridSize; col++)
             {
                 _grid[row, col] = new Cell
                 {
@@ -64,8 +65,8 @@ public class GridService
 
             bool isHorizontal = _random.Next(2) == 0;
 
-            int startRow = _random.Next(0, isHorizontal ? 10 : 10 - shipSize + 1);
-            int startCol = _random.Next(0, isHorizontal ? 10 - shipSize + 1 : 10);
+            int startRow = _random.Next(0, isHorizontal ? _gridSize : _gridSize - shipSize + 1);
+            int startCol = _random.Next(0, isHorizontal ? _gridSize - shipSize + 1 : _gridSize);
 
             bool overlaps = false;
 
@@ -96,67 +97,28 @@ public class GridService
         return shipCells;
     }
 
-    //public Cell[,] PrintGrid()
-    //{
-    //    Cell[,] gridCopy = _grid;
-
-    //    // Print column headers (1 to 10)
-    //    Console.Write("   "); // spacing for row labels
-    //    for (int col = 1; col <= 10; col++)
-    //    {
-    //        Console.Write($"{col,2} ");
-    //    }
-    //    Console.WriteLine();
-
-    //    for (int row = 0; row < 10; row++)
-    //    {
-    //        char rowLabel = (char)('A' + row); // Convert 0 => 'A', 1 => 'B', etc.
-    //        Console.Write($"{rowLabel}  "); // Print row label
-
-    //        for (int col = 0; col < 10; col++)
-    //        {
-    //            var cell = _grid[row, col];
-
-    //            // Choose a character based on cell type
-    //            string displayChar = cell.Type switch
-    //            {
-    //                CellType.Battleship => "B",
-    //                CellType.Destroyership1 => "D1",
-    //                CellType.Destroyership2 => "D2",
-    //                _ => "."
-    //            };
-
-    //            Console.Write($"{displayChar,2} ");
-    //        }
-
-    //        Console.WriteLine(); // New line after each row
-    //    }
-
-    //    return gridCopy;
-    //}
-
     public string PrintActualGrid()
     {
         var sb = new System.Text.StringBuilder();
 
         sb.Append("   ");
-        for (int col = 1; col <= 10; col++)
+        for (int col = 1; col <= _gridSize; col++)
         {
             sb.Append($"{col,2} ");
         }
         sb.AppendLine();
 
-        for (int row = 0; row < 10; row++)
+        for (int row = 0; row < _gridSize; row++)
         {
             char rowLabel = (char)('A' + row);
             sb.Append($"{rowLabel}  ");
 
-            for (int col = 0; col < 10; col++)
+            for (int col = 0; col < _gridSize; col++)
             {
                 var cell = _grid[row, col];
                 string displayChar = cell.Type switch
                 {
-                    CellType.Battleship => "B",
+                    CellType.Battleship => "Ba",
                     CellType.Destroyership1 => "D1",
                     CellType.Destroyership2 => "D2",
                     CellType.Hit => "H",
@@ -172,23 +134,24 @@ public class GridService
 
         return sb.ToString();
     }
+
     public string PrintUserInputGrid()
     {
         var sb = new System.Text.StringBuilder();
 
         sb.Append("   ");
-        for (int col = 1; col <= 10; col++)
+        for (int col = 1; col <= _gridSize; col++)
         {
             sb.Append($"{col,2} ");
         }
         sb.AppendLine();
 
-        for (int row = 0; row < 10; row++)
+        for (int row = 0; row < _gridSize; row++)
         {
             char rowLabel = (char)('A' + row);
             sb.Append($"{rowLabel}  ");
 
-            for (int col = 0; col < 10; col++)
+            for (int col = 0; col < _gridSize; col++)
             {
                 var cell = _grid[row, col];
                 string displayChar = cell.Type switch
@@ -239,5 +202,4 @@ public class GridService
             return "yeee.. it was a shot!!";
         }
     }
-
 }
